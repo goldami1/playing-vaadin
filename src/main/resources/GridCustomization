@@ -1,0 +1,51 @@
+------------------------------------------------------------------------------------------------
+1. add code to gridConnector before _fireClickEvent function
+============================================================
+    let lastVisitedSectionIndex = 0;
+
+	grid.$.table.addEventListener('scroller-mouseup', e =>
+    {
+    	_tryDispatchScrollerReachedTableBottomAreaEvent();
+    });
+
+	grid.$.table.addEventListener('scroll', e =>
+	{ 
+		let sectionSize = grid.$.table.scrollHeight/10;
+
+		for(let sectionIndex = 0; sectionIndex < 10; sectionIndex++)
+		{
+			if(grid._scrollPosition >= sectionIndex*sectionSize && grid._scrollPosition <= (sectionIndex+1)*sectionSize && lastVisitedSectionIndex != sectionIndex+1)
+			{
+				lastVisitedSectionIndex = sectionIndex+1;
+				grid.dispatchEvent(new CustomEvent('scrolled-percentage-changed', { detail: { percentageScrolled: sectionIndex/10}}));
+				_tryDispatchScrollerReachedTableBottomAreaEvent();
+				break;
+			}
+		}
+  });
+	
+	function _tryDispatchScrollerReachedTableBottomAreaEvent()
+	{
+		let scrollHeight = grid.$.table.scrollHeight;
+		let scrollPos = grid._scrollPosition;
+		let scrollSection = scrollPos/scrollHeight; 
+		
+		if(scrollSection >= 0.8)
+		{
+			grid.dispatchEvent(new CustomEvent('scroller-reached-table-bottom-area'));
+		}
+	}
+------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
+2. add code to vaadin-grid-outer-scroller::ready at the end of 'mouseup' eventListener handler
+==============================================================================================
+this.dispatchEvent(new CustomEvent('scroller-mouseup'));
+------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
+3. add code to vaadin-grid-scroll-mixin between 'scroll' and 'focusin' event listeners
+======================================================================================
+this.$.outerscroller.addEventListener('scroller-mouseup', e => 
+    {
+    	this.$.table.dispatchEvent(new CustomEvent('scroller-mouseup', { detail: { top: this.$.table.scrollTop, height: this.$.table.scrollHeight } }));
+    });
+------------------------------------------------------------------------------------------------
