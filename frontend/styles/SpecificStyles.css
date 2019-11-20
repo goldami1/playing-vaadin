@@ -1,14 +1,65 @@
 .moving{
-	width: 50px;
-	overflow: hidden;
+	top: 0px;
+	left: 0px;
+	position: absolute;
+	width: 38px;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
 	white-space: nowrap;
-	text-overflow: clip;
 	background-color: #fefecc;
 	transition: width 0.5s ease;
-	height: 500px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	padding-left: 4px;
+	padding-right: 4px;
+	flex-direction: column;
+	z-index: 1;
+	box-shadow: -10px 0 5px -10px #888 inset;
+}
+
+
+.main-app-layout-content
+{
+	padding-left: 38px;
+	margin: 0px;
+	background-color: #98c3f5;
+	width: 100%;
+	height: 100%;
+}
+
+.main-app-layout
+{
+	width: 100%;
+	height: 100%;
 }
 
 .moving:hover{
 	width: 400px;
+}
+
+.tester
+{
+	justify-content: flex-end;
+}
+
+.header-item-style
+{
+	padding: 8px 4px 8px 5px;
+	border-radius: 3px;
+	user-select: none;
+	margin-top: 0px;
+	margin-bottom: 20px;
+}
+
+.menu-item-style
+{
+	border-radius: 3px;
+	user-select: none;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding: 8px 4px 8px 5px;
+	transition: background-color 0.5s ease;
+}
+
+.menu-item-style:hover {
+	background-color: #E7F1FE;
 }
