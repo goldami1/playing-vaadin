@@ -1,14 +1,13 @@
-.moving{
+[class*="menu-layout-"]
+{
 	top: 0px;
 	left: 0px;
 	position: absolute;
-	width: 38px;
 	height: 100%;
 	overflow-x: hidden;
 	overflow-y: auto;
 	white-space: nowrap;
 	background-color: #fefecc;
-	transition: width 0.5s ease;
 	padding-left: 4px;
 	padding-right: 4px;
 	flex-direction: column;
@@ -16,24 +15,70 @@
 	box-shadow: -10px 0 5px -10px #888 inset;
 }
 
-
-.main-app-layout-content
+.menu-layout-dynamic
 {
+	width: 38px;
+	transition: width 0.5s ease;
+}
+
+.menu-layout-dynamic:hover{
+	width: 400px;
+}
+
+.menu-layout-collapsed{
+	width: 38px;
+}
+
+.menu-layout-extended{
+	width: 400px;
+	position: static;
+}
+
+[class*="main-app-layout-"]
+{
+	width: 100%;
+	height: 100%;
+}
+
+.main-app-layout-base{
+}
+
+.main-app-layout-content{
+	padding: 0px;
+	margin: 0px;
+	background-color: #98c3f5;
+}
+
+.main-app-layout-content-with-menu{
 	padding-left: 38px;
 	margin: 0px;
 	background-color: #98c3f5;
-	width: 100%;
-	height: 100%;
 }
 
-.main-app-layout
-{
-	width: 100%;
-	height: 100%;
+.menu-item-icon-rotation{
+	-webkit-animation: rotation 0.4s ease;
 }
 
-.moving:hover{
-	width: 400px;
+.menu-item-icon-rotation-toggled{
+	-webkit-animation: rotation-toggled 0.4s ease;
+}
+
+@-webkit-keyframes rotation-toggled {
+		from {
+				-webkit-transform: rotate(0deg);
+		}
+		to {
+				-webkit-transform: rotate(359deg);
+		}
+}
+
+@-webkit-keyframes rotation {
+		from {
+				-webkit-transform: rotate(0deg);
+		}
+		to {
+				-webkit-transform: rotate(359deg);
+		}
 }
 
 .tester

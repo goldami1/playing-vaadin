@@ -1,0 +1,27 @@
+.icon-item-rotation-toggle-enabled
+{
+	-webkit-animation: rotation-toggle-enable 0.4s ease;
+}
+
+.icon-item-rotation-toggle-disabled
+{
+	-webkit-animation: rotation-toggle-disable 0.4s ease;
+}
+
+@-webkit-keyframes rotation-toggle-enable {
+		from {
+				-webkit-transform: rotate(0deg);
+		}
+		to {
+				-webkit-transform: rotate(359deg);
+		}
+}
+
+@-webkit-keyframes rotation-toggle-disable {
+		from {
+				-webkit-transform: rotate(0deg);
+		}
+		to {
+				-webkit-transform: rotate(359deg);
+		}
+}

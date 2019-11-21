@@ -4,6 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.github.appreciated.IronCollapse;
+import com.packagename.myapp.spring.menu.item.components.SeparatorElement;
+import com.packagename.myapp.spring.menu.item.components.TogglableActionIcon;
+import com.packagename.myapp.spring.menu.item.components.TogglableIcon;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
@@ -23,14 +26,12 @@ public class DefaultView extends HorizontalLayout
 	private MenuLayout menu;
 	private Div content;
 	private List<String> submenuColors;
-	
-	/**
-	 * 
-	 */
+	private enum MenuDisplayType {EXTENDED,COLLAPSED,DYNAMIC};
+	private MenuDisplayType menuDisplayType = MenuDisplayType.DYNAMIC;
 	
 	public DefaultView()
 	{
-		this.addClassName("main-app-layout");
+		this.addClassName("main-app-layout-base");
 		this.setSpacing(false);
 		Label textToAdd;
 		
@@ -43,8 +44,10 @@ public class DefaultView extends HorizontalLayout
 		submenuColors.add("#cbcc00");
 		
 		menu = new MenuLayout();
+		menu.setClassName("menu-layout-dynamic");
+		
 		content = new Div();
-		content.addClassName("main-app-layout-content");
+		content.setClassName("main-app-layout-content-with-menu");
 		
 		//
 		VerticalLayout menuHeaderWrapper = new VerticalLayout();
@@ -54,12 +57,11 @@ public class DefaultView extends HorizontalLayout
 		menuHeaderWrapper.getStyle().set("margin-bottom", "20px");
 		HorizontalLayout menuHeader = new HorizontalLayout();
 		menuHeader.addClassName("header-item-style");
-
-		Icon icon = VaadinIcon.MENU.create();
-
-		Div firstPart = new Div();
-		firstPart.add(icon);
-		menuHeader.add(firstPart);
+		
+		TogglableActionIcon menuIcon = new TogglableActionIcon("icon-item-rotation-toggle-enabled",
+				"icon-item-rotation-toggle-disabled", VaadinIcon.MENU.create(), () -> toggleMenuState());
+		
+		menuHeader.add(menuIcon);
 		
 		Div logoWrapper = new Div();
 		VerticalLayout logo = new  VerticalLayout();
@@ -82,12 +84,7 @@ public class DefaultView extends HorizontalLayout
 		menuHeader.add(wrapper);
 		menuHeader.setWidthFull();
 		
-		Div sep = new Div();
-		sep.setWidthFull();
-		sep.setHeight("2px");
-		sep.getStyle().set("background-color", "black");
-		
-		menuHeaderWrapper.add(menuHeader, sep);
+		menuHeaderWrapper.add(menuHeader, SeparatorElement.create());
 
 		
 		
@@ -97,7 +94,6 @@ public class DefaultView extends HorizontalLayout
 		menuFooter.setSpacing(false);
 		
 		menu.add(menuHeaderWrapper, menuFooter);
-		menu.addClassName("moving");
 		
 		add(menu, content);
 		setFlexGrow(1, content);
@@ -107,13 +103,10 @@ public class DefaultView extends HorizontalLayout
 		menuFooter.add(createSubMenu());
 		menuFooter.add(createSubMenu());
 		
-//		Icon submenuDropdownIcon = VaadinIcon.SIGN_OUT_ALT.create();
-//		FlexLayout wrapper = new FlexLayout(submenuDropdownIcon);
-//		wrapper.setJustifyContentMode(JustifyContentMode.CENTER);
+
 		
-//		wrapper.addClassName("tester");
-//		menu.expand(menuFooter);
-//		menu.add(wrapper);
+		
+		
 		
 		BackEnd backEnd = new BackEnd();
 		
@@ -121,8 +114,6 @@ public class DefaultView extends HorizontalLayout
         grid.setSizeFull();
         
         ListDataProvider<Tester> ldp = new ListDataProvider<>(backEnd.getTesters());
-        
-//        DataProvider.fromcallbacks
         
         grid.setDataProvider(ldp);
         grid.addSectionScrolledListener(event -> 
@@ -159,6 +150,28 @@ public class DefaultView extends HorizontalLayout
         content.add(grid);
 	}
 	
+	private void toggleMenuState()
+	{
+		if(menuDisplayType == MenuDisplayType.DYNAMIC)
+		{
+			menuDisplayType = MenuDisplayType.EXTENDED;
+			menu.setClassName("menu-layout-extended");
+			content.setClassName("main-app-layout-content");
+		}
+		else if(menuDisplayType == MenuDisplayType.EXTENDED)
+		{
+			menuDisplayType = MenuDisplayType.COLLAPSED;
+			menu.setClassName("menu-layout-collapsed");
+			content.setClassName("main-app-layout-content-with-menu");
+		}
+		else
+		{
+			menuDisplayType = MenuDisplayType.DYNAMIC;
+			menu.setClassName("menu-layout-dynamic");
+			content.setClassName("main-app-layout-content-with-menu");
+		}
+	}
+
 	private VerticalLayout createSubMenu()
 	{
 		Label textToAdd;
@@ -209,7 +222,7 @@ public class DefaultView extends HorizontalLayout
 		
 		return submenu;
 	}
-
+	
 	public class BackEnd implements PageableService<Tester>
     {
     	private List<Tester> testers;
