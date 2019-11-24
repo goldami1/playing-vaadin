@@ -85,8 +85,6 @@ public class DefaultView extends HorizontalLayout
 		menuHeader.setWidthFull();
 		
 		menuHeaderWrapper.add(menuHeader, SeparatorElement.create());
-
-		
 		
 		VerticalLayout menuFooter = new VerticalLayout();
 		menuFooter.setSizeFull();
@@ -193,7 +191,7 @@ public class DefaultView extends HorizontalLayout
 		Icon submenuDropdownIcon = VaadinIcon.CHEVRON_DOWN_SMALL.create();
 		FlexLayout wrapper = new FlexLayout(submenuDropdownIcon);
 		
-		wrapper.addClassName("tester");
+		wrapper.setJustifyContentMode(JustifyContentMode.END);
 		button3.expand(wrapper);
 		button3.add(wrapper);
 		

@@ -1,0 +1,13 @@
+.menu-item-style
+{
+	border-radius: 3px;
+	user-select: none;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding: 8px 4px 8px 5px;
+	transition: background-color 0.5s ease;
+}
+
+.menu-item-style:hover {
+	background-color: #E7F1FE;
+}

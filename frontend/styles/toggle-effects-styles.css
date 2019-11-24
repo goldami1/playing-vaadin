@@ -25,3 +25,29 @@
 				-webkit-transform: rotate(359deg);
 		}
 }
+
+.menu-item-icon-rotation{
+	-webkit-animation: rotation 0.4s ease;
+}
+
+.menu-item-icon-rotation-toggled{
+	-webkit-animation: rotation-toggled 0.4s ease;
+}
+
+@-webkit-keyframes rotation {
+		from {
+				-webkit-transform: rotate(0deg);
+		}
+		to {
+				-webkit-transform: rotate(359deg);
+		}
+}
+
+@-webkit-keyframes rotation-toggled {
+		from {
+				-webkit-transform: rotate(359deg);
+		}
+		to {
+				-webkit-transform: rotate(0deg);
+		}
+}

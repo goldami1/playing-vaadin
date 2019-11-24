@@ -55,6 +55,20 @@
 	background-color: #98c3f5;
 }
 
+.menu-item-style
+{
+	border-radius: 3px;
+	user-select: none;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding: 8px 4px 8px 5px;
+	transition: background-color 0.5s ease;
+}
+
+.menu-item-style:hover {
+	background-color: #E7F1FE;
+}
+
 .menu-item-icon-rotation{
 	-webkit-animation: rotation 0.4s ease;
 }
@@ -81,11 +95,6 @@
 		}
 }
 
-.tester
-{
-	justify-content: flex-end;
-}
-
 .header-item-style
 {
 	padding: 8px 4px 8px 5px;
@@ -93,18 +102,4 @@
 	user-select: none;
 	margin-top: 0px;
 	margin-bottom: 20px;
-}
-
-.menu-item-style
-{
-	border-radius: 3px;
-	user-select: none;
-	margin-top: 0px;
-	margin-bottom: 0px;
-	padding: 8px 4px 8px 5px;
-	transition: background-color 0.5s ease;
-}
-
-.menu-item-style:hover {
-	background-color: #E7F1FE;
 }
