@@ -19,7 +19,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.router.Route;
 
-@Route(value = "")
+//@Route(value = "")
 @CssImport(value = "./styles/SpecificStyles.css")
 public class DefaultView extends HorizontalLayout
 {

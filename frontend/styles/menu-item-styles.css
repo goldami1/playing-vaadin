@@ -1,5 +1,11 @@
+.menu-item-text-style
+{
+	font-weight: 400;
+}
+
 .menu-item-style
 {
+	align-content: flex-start;
 	border-radius: 3px;
 	user-select: none;
 	margin-top: 0px;

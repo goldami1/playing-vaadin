@@ -8,11 +8,11 @@ import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode;
 
-public abstract class MenuHeaderItem extends HeaderItem<HorizontalLayout>
+public abstract class HeaderHamburgerMenuItem extends HeaderMenuItem<HorizontalLayout>
 {
 	private static final long serialVersionUID = -1208289264314494270L;
 	
-	public MenuHeaderItem()
+	public HeaderHamburgerMenuItem()
 	{
 		HorizontalLayout rowLayout = createRowLayout();
 		
@@ -33,8 +33,8 @@ public abstract class MenuHeaderItem extends HeaderItem<HorizontalLayout>
 
 	private Div createMenuComponent()
 	{
-		return new Div(new TogglableActionIcon("icon-item-rotation-toggle-enabled",
-				"icon-item-rotation-toggle-disabled", VaadinIcon.MENU.create(), () -> toggleMenuState()));
+		return new Div(new TogglableActionIcon("menu-item-icon-rotation",
+				"menu-item-icon-rotation-toggled", VaadinIcon.MENU.create(), () -> toggleMenuState()));
 	}
 	
 	private void toggleMenuState()
@@ -42,11 +42,11 @@ public abstract class MenuHeaderItem extends HeaderItem<HorizontalLayout>
 		fireEvent(new MenuComponentClickedEvent(this, false));
 	}
 
-	public class MenuComponentClickedEvent extends ComponentEvent<MenuHeaderItem>
+	public class MenuComponentClickedEvent extends ComponentEvent<HeaderHamburgerMenuItem>
 	{
 		private static final long serialVersionUID = -2880318393040733464L;
 
-		public MenuComponentClickedEvent(MenuHeaderItem source, boolean fromClient)
+		public MenuComponentClickedEvent(HeaderHamburgerMenuItem source, boolean fromClient)
 		{
 			super(source, fromClient);
 		}
