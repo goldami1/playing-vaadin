@@ -10,15 +10,17 @@ import com.vaadin.flow.component.icon.Icon;
 public class BodyMenuItem extends MenuItem implements ClickNotifier<BodyMenuItem>
 {
 	private static final long serialVersionUID = 3351314682843165886L;
-	private List<BodyMenuItem> submenuItems;
+
 	private MenuEntry menuEntry;
+	
+	private boolean submenu;
 	private IronCollapseLayout submenuLayout;
-	private boolean isSubmenu;
+	private List<BodyMenuItem> submenuItems;
 	
 	public BodyMenuItem(Icon menuEntryIcon, String menuEntryTitle)
 	{
 		contentWrapper.setWidthFull();
-		isSubmenu = false;
+		submenu = false;
 		
 		menuEntry = new MenuEntry(menuEntryIcon, menuEntryTitle);
 		contentWrapper.add(menuEntry);
@@ -26,10 +28,10 @@ public class BodyMenuItem extends MenuItem implements ClickNotifier<BodyMenuItem
 	
 	private void initAsSubmenu()
 	{
-		if(isSubmenu)
+		if(submenu)
 			return;
 		
-		isSubmenu = !isSubmenu;
+		submenu = !submenu;
 		submenuItems = new LinkedList<>();
 		submenuLayout = new IronCollapseLayout();
 		contentWrapper.add(submenuLayout);

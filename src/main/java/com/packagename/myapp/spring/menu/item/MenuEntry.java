@@ -1,5 +1,6 @@
 package com.packagename.myapp.spring.menu.item;
 
+import com.packagename.myapp.spring.events.TogglableComponentOuterClickedEvent;
 import com.packagename.myapp.spring.menu.item.components.TogglableIcon;
 import com.vaadin.flow.component.ClickNotifier;
 import com.vaadin.flow.component.ComponentEvent;
@@ -15,6 +16,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 public class MenuEntry extends MenuItem implements ClickNotifier<MenuEntry>
 {
 	private static final long serialVersionUID = 6561923337482901458L;
+	
 	private Label menuEntryTitle;
 	private Icon menuEntryIcon;
 	private HorizontalLayout menuEntryWrapper;
@@ -81,7 +83,7 @@ public class MenuEntry extends MenuItem implements ClickNotifier<MenuEntry>
 				listener.onComponentEvent(event);
 				if(submenuDropdownIcon != null)
 				{
-					submenuDropdownIcon.toggle();
+					submenuDropdownIcon.click();
 				}
 			}
 		});
