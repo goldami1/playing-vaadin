@@ -2,6 +2,7 @@ package com.packagename.myapp.spring.menu;
 
 import com.github.appreciated.IronCollapse;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.charts.model.style.Color;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 public class IronCollapseLayout extends CompositeWrapperLayout<IronCollapse>
@@ -19,6 +20,12 @@ public class IronCollapseLayout extends CompositeWrapperLayout<IronCollapse>
 		
 		contentWrapper.add(wrapper);
 		contentWrapper.setWidthFull();
+	}
+	
+	public IronCollapseLayout(Color backgroundColor)
+	{
+		this();
+		contentWrapper.getElement().getStyle().set("background-color", backgroundColor.toString());
 	}
 	
 	public void add(Component component)

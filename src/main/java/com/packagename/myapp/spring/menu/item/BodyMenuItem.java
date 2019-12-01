@@ -4,6 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.packagename.myapp.spring.menu.IronCollapseLayout;
+import com.packagename.myapp.spring.utils.ColorUtils;
+import com.packagename.myapp.spring.utils.ColorUtils.COLOR;
+import com.packagename.myapp.spring.utils.ColorUtils.RGBColorModel;
 import com.vaadin.flow.component.ClickNotifier;
 import com.vaadin.flow.component.icon.Icon;
 
@@ -14,16 +17,39 @@ public class BodyMenuItem extends MenuItem implements ClickNotifier<BodyMenuItem
 	private MenuEntry menuEntry;
 	
 	private boolean submenu;
+	private int menuHierarchyLevel;
+	private static final int COLOR_MULTIPLICATION_CONST = 25;
+	private static final String defaultBackgroundColor = COLOR.LIGHTGRAY.toString();
 	private IronCollapseLayout submenuLayout;
 	private List<BodyMenuItem> submenuItems;
+	
 	
 	public BodyMenuItem(Icon menuEntryIcon, String menuEntryTitle)
 	{
 		contentWrapper.setWidthFull();
+		setBackgroundColor(RGBColorModel.create(defaultBackgroundColor).setOpacity(0.5f).toString());
 		submenu = false;
+		menuHierarchyLevel = 0;
 		
-		menuEntry = new MenuEntry(menuEntryIcon, menuEntryTitle);
-		contentWrapper.add(menuEntry);
+		contentWrapper.add(menuEntry = new MenuEntry(menuEntryIcon, menuEntryTitle));
+	};
+	
+	public BodyMenuItem setHierarchyLevel(int menuHierarchyLevel)
+	{
+		this.menuHierarchyLevel = menuHierarchyLevel;
+		setBackgroundColor(evaluateBackgroundColor().toString());
+		return this;
+	}
+	
+	public BodyMenuItem addSubItem(BodyMenuItem bodyMenuItem)
+	{
+		bodyMenuItem.setHierarchyLevel(menuHierarchyLevel+1);
+		
+		initAsSubmenu();
+		submenuItems.add(bodyMenuItem);
+		submenuLayout.add(bodyMenuItem);
+		
+		return this;
 	}
 	
 	private void initAsSubmenu()
@@ -42,12 +68,8 @@ public class BodyMenuItem extends MenuItem implements ClickNotifier<BodyMenuItem
 		});
 	}
 	
-	public BodyMenuItem addSubItem(BodyMenuItem bodyMenuItem)
+	private RGBColorModel evaluateBackgroundColor()
 	{
-		initAsSubmenu();
-		submenuItems.add(bodyMenuItem);
-		submenuLayout.add(bodyMenuItem);
-		
-		return this;
+		return ColorUtils.darkenColor(RGBColorModel.create(contentWrapper.getStyle().get(getBackgroundPropertyName())).setOpacity(0.5f), 100-menuHierarchyLevel*COLOR_MULTIPLICATION_CONST);
 	}
 }

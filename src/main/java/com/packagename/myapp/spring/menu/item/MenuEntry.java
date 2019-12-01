@@ -1,6 +1,5 @@
 package com.packagename.myapp.spring.menu.item;
 
-import com.packagename.myapp.spring.events.TogglableComponentOuterClickedEvent;
 import com.packagename.myapp.spring.menu.item.components.TogglableIcon;
 import com.vaadin.flow.component.ClickNotifier;
 import com.vaadin.flow.component.ComponentEvent;
