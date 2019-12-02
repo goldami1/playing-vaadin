@@ -1,5 +1,4 @@
-[class*="menu-layout-"]
-{
+[class*="menu-layout-"]{
 	top: 0px;
 	left: 0px;
 	position: absolute;
@@ -7,7 +6,7 @@
 	overflow-x: hidden;
 	overflow-y: auto;
 	white-space: nowrap;
-	background-color: #f5f5f5;
+	background-color: #F5F5F5;
 	padding-left: 4px;
 	padding-right: 4px;
 	flex-direction: column;
@@ -15,8 +14,7 @@
 	box-shadow: -10px 0 5px -10px #888 inset;
 }
 
-.menu-layout-dynamic
-{
+.menu-layout-dynamic{
 	width: 38px;
 	transition: width 0.5s ease;
 }
@@ -130,53 +128,4 @@
 	padding-left: 38px;
 	margin: 0px;
 	background-color: #98c3f5;
-}
-
-.menu-item-style
-{
-	border-radius: 3px;
-	user-select: none;
-	margin-top: 0px;
-	margin-bottom: 0px;
-	padding: 8px 4px 8px 5px;
-	transition: background-color 0.5s ease;
-}
-
-.menu-item-style:hover {
-	background-color: #E7F1FE;
-}
-
-.menu-item-icon-rotation{
-	-webkit-animation: rotation 0.4s ease;
-}
-
-.menu-item-icon-rotation-toggled{
-	-webkit-animation: rotation-toggled 0.4s ease;
-}
-
-@-webkit-keyframes rotation-toggled {
-		from {
-				-webkit-transform: rotate(0deg);
-		}
-		to {
-				-webkit-transform: rotate(359deg);
-		}
-}
-
-@-webkit-keyframes rotation {
-		from {
-				-webkit-transform: rotate(0deg);
-		}
-		to {
-				-webkit-transform: rotate(359deg);
-		}
-}
-
-.header-item-style
-{
-	padding: 8px 4px 8px 5px;
-	border-radius: 3px;
-	user-select: none;
-	margin-top: 0px;
-	margin-bottom: 20px;
 }

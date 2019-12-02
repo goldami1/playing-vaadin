@@ -1,10 +1,8 @@
-.menu-item-text-style
-{
+.menu-item-text-style{
 	font-weight: 400;
 }
 
-.menu-item-style
-{
+.menu-item-style{
 	align-content: flex-start;
 	border-radius: 3px;
 	user-select: none;
@@ -14,6 +12,6 @@
 	transition: background-color 0.5s ease;
 }
 
-.menu-item-style:hover {
+.menu-item-style:hover{
 	background-color: #E7F1FE;
 }

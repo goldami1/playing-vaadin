@@ -1,10 +1,8 @@
-.icon-item-rotation-toggle-enabled
-{
+.icon-item-rotation-toggle-enabled{
 	-webkit-animation: rotation-toggle-enable 0.4s ease forwards;
 }
 
-.icon-item-rotation-toggle-disabled
-{
+.icon-item-rotation-toggle-disabled{
 	-webkit-animation: rotation-toggle-disable 0.4s ease forwards;
 }
 

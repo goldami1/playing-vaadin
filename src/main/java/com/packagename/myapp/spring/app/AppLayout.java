@@ -23,7 +23,7 @@ import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.router.Route;
 
 @Route(value = "")
-@CssImport(value = "./styles/SpecificStyles.css")
+@CssImport(value = "./styles/app-layout-styles.css")
 public class AppLayout extends CompositeWrapperHorizontalLayout
 {
 	private static final long serialVersionUID = 1366743745420863584L;

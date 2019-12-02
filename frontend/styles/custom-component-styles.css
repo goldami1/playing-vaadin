@@ -1,22 +1,17 @@
-.separator-style
-{
+.separator-style{
 	height: 2px;
 	background-color: black; 
 }
 
-[class*="custom-label-"]
-{
+[class*="custom-label-"]{
 	font-weight: 600;
 	color: var(--lumo-header-text-color);
 }
 
-
-.custom-label-title-style
-{
+.custom-label-title-style{
 	font-size: var(--lumo-font-size-xxxl);
 }
 
-.custom-label-subtitle-style
-{
+.custom-label-subtitle-style{
 	font-size: var(--lumo-font-size-xxs);
 }
