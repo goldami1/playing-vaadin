@@ -17,11 +17,17 @@ public abstract class TogglableActionComponent<T extends Component & HasStyle & 
 		this.toggleAction = Optional.ofNullable(toggleAction).get();
 		component.addClickListener(e -> activateOnToggle());
 	}
+	
+	@Override
+	public void activateOnToggle()
+	{
+		ITogglableActionable.super.activateOnToggle();
+		toggle();
+	}
 
 	@Override
 	public Runnable getToggleAction()
 	{
 		return toggleAction;
 	}
-
 }

@@ -24,7 +24,7 @@ public class BodyMenuItem extends MenuItem implements ClickNotifier<BodyMenuItem
 	private List<BodyMenuItem> submenuItems;
 	
 	
-	public BodyMenuItem(Icon menuEntryIcon, String menuEntryTitle)
+	public BodyMenuItem(Icon menuEntryIcon, String menuEntryTitle, Runnable toggleAction)
 	{
 		setBackgroundColor(RGBColorModel.create(defaultBackgroundColor).setOpacity(0.5f).toString());
 		contentWrapper.setWidthFull();
@@ -32,7 +32,7 @@ public class BodyMenuItem extends MenuItem implements ClickNotifier<BodyMenuItem
 		submenu = false;
 		menuHierarchyLevel = 0;
 		
-		contentWrapper.add(menuEntry = new MenuEntry(menuEntryIcon, menuEntryTitle));
+		contentWrapper.add(menuEntry = MenuEntry.create(menuEntryIcon, menuEntryTitle, toggleAction));
 	};
 	
 	public BodyMenuItem setHierarchyLevel(int menuHierarchyLevel)

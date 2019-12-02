@@ -1,9 +1,10 @@
 package com.packagename.myapp.spring.menu.item;
 
+import com.packagename.myapp.spring.menu.item.component.TogglableActionComponent;
 import com.packagename.myapp.spring.menu.item.component.TogglableIcon;
-import com.vaadin.flow.component.ClickNotifier;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -12,7 +13,7 @@ import com.vaadin.flow.shared.Registration;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
-public class MenuEntry extends MenuItem implements ClickNotifier<MenuEntry>
+public class MenuEntry extends TogglableActionComponent<Div> implements IMenuItem
 {
 	private static final long serialVersionUID = 6561923337482901458L;
 	
@@ -21,26 +22,35 @@ public class MenuEntry extends MenuItem implements ClickNotifier<MenuEntry>
 	private HorizontalLayout menuEntryWrapper;
 	private TogglableIcon submenuDropdownIcon;
 	
-	private MenuEntry()
+	private MenuEntry(Div component, Runnable toggleAction)
+	{
+		super(component, toggleAction);
+	}
+	
+	public static MenuEntry create(Icon menuEntryIcon, String menuEntryTitle, Runnable toggleAction)
+	{
+		MenuEntry menuEntry = new MenuEntry(new Div(), toggleAction);
+		menuEntry.init(menuEntryIcon, menuEntryTitle);
+		menuEntry.contentWrapper.setWidthFull();
+		
+		return menuEntry;
+	}
+	
+	private void init(Icon menuEntryIcon, String menuEntryTitle)
 	{
 		menuEntryWrapper = new HorizontalLayout();
 		menuEntryWrapper.setPadding(false);
 		menuEntryWrapper.setMargin(false);
 		menuEntryWrapper.setSpacing(false);
-		menuEntryWrapper.setWidthFull();
-		
-		contentWrapper.add(menuEntryWrapper);
-	}
-	
-	public MenuEntry(Icon menuEntryIcon, String menuEntryTitle)
-	{
-		this();
+		menuEntryWrapper.addClickListener(e -> fireEvent(new MenuEntryClickedEvent(this, false)));
 		
 		menuEntryWrapper.addClassName("menu-item-style");
 		HorizontalLayout iconAndLabelLayout = createIconTitleLayout(menuEntryIcon, menuEntryTitle);
 		menuEntryWrapper.add(iconAndLabelLayout);
+		addMenuItemClickListener(e -> activateOnToggle());
+		
+		contentWrapper.add(menuEntryWrapper);
 	}
-
 
 	public void addSubmenuToggleIcon()
 	{
@@ -54,11 +64,7 @@ public class MenuEntry extends MenuItem implements ClickNotifier<MenuEntry>
 		menuEntryWrapper.expand(iconWrapper);
 		menuEntryWrapper.add(iconWrapper);
 		
-		menuEntryWrapper.addClickListener(e ->
-		{
-			fireEvent(new MenuEntryClickedEvent(this, false));
-			submenuDropdownIcon.toggle();
-		});
+		menuEntryWrapper.addClickListener(e -> submenuDropdownIcon.toggle());
 	}
 	
 	private HorizontalLayout createIconTitleLayout(Icon menuEntryIcon, String menuEntryTitle)
@@ -81,11 +87,22 @@ public class MenuEntry extends MenuItem implements ClickNotifier<MenuEntry>
 	
 	public static class MenuEntryClickedEvent extends ComponentEvent<MenuEntry>
 	{
+		private static final long serialVersionUID = 9050661455462500952L;
+		
 		public MenuEntryClickedEvent(MenuEntry source, boolean fromClient) {
 			super(source, fromClient);
 		}
+	}
 
-		private static final long serialVersionUID = 9050661455462500952L;
-		
+	@Override
+	public String getToggleEnableClassName() {
+		//TODO
+		return "nana";
+	}
+
+	@Override
+	public String getToggleDisableClassName() {
+		//TODO
+		return "nana";
 	}
 }
