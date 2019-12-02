@@ -1,9 +1,7 @@
 package com.packagename.myapp.spring.menu.item.components;
 
 import java.io.Serializable;
-import java.util.Optional;
 
-import com.packagename.myapp.spring.events.TogglableComponentOuterClickedEvent;
 import com.packagename.myapp.spring.menu.CompositeWrapperLayout;
 import com.vaadin.flow.component.ClickNotifier;
 import com.vaadin.flow.component.Component;
@@ -25,16 +23,9 @@ public abstract class TogglableComponent<T extends Component & HasStyle & ClickN
 	public TogglableComponent(T component)
 	{
 		this();
-		Optional.ofNullable(component).get().addClickListener(e -> toggle());
-		contentWrapper.addClickListener(e -> fireEvent(new TogglableComponentOuterClickedEvent<T>(this, false)));
+		contentWrapper.addClickListener(e -> toggle());
 		contentWrapper.add(component);
-		this.addListener(TogglableComponentOuterClickedEvent.class, e -> toggle());
 		this.component = component;
-	}
-	
-	public void click()
-	{
-		fireEvent(new TogglableComponentOuterClickedEvent<T>(this, false));
 	}
 	
 	@Override

@@ -54,7 +54,11 @@ public class MenuEntry extends MenuItem implements ClickNotifier<MenuEntry>
 		menuEntryWrapper.expand(iconWrapper);
 		menuEntryWrapper.add(iconWrapper);
 		
-		menuEntryWrapper.addClickListener(e -> fireEvent(new MenuEntryClickedEvent(this, false)));
+		menuEntryWrapper.addClickListener(e ->
+		{
+			fireEvent(new MenuEntryClickedEvent(this, false));
+			submenuDropdownIcon.toggle();
+		});
 	}
 	
 	private HorizontalLayout createIconTitleLayout(Icon menuEntryIcon, String menuEntryTitle)
@@ -72,20 +76,7 @@ public class MenuEntry extends MenuItem implements ClickNotifier<MenuEntry>
 	
 	public Registration addMenuItemClickListener(ComponentEventListener<MenuEntryClickedEvent> listener)
 	{
-		return addListener(MenuEntryClickedEvent.class, new ComponentEventListener<MenuEntry.MenuEntryClickedEvent>()
-		{
-			private static final long serialVersionUID = -8108388415081227841L;
-
-			@Override
-			public void onComponentEvent(MenuEntryClickedEvent event)
-			{
-				listener.onComponentEvent(event);
-				if(submenuDropdownIcon != null)
-				{
-					submenuDropdownIcon.click();
-				}
-			}
-		});
+		return addListener(MenuEntryClickedEvent.class, listener);
 	}
 	
 	public static class MenuEntryClickedEvent extends ComponentEvent<MenuEntry>

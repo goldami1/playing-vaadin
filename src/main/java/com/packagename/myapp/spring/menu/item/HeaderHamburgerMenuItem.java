@@ -2,10 +2,12 @@ package com.packagename.myapp.spring.menu.item;
 
 import com.packagename.myapp.spring.menu.item.components.TogglableActionIcon;
 import com.vaadin.flow.component.ComponentEvent;
+import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.shared.Registration;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode;
 
 public abstract class HeaderHamburgerMenuItem extends HeaderMenuItem<HorizontalLayout>
@@ -30,6 +32,11 @@ public abstract class HeaderHamburgerMenuItem extends HeaderMenuItem<HorizontalL
 	}
 	
 	public abstract Div createLogoComponent();
+	
+	public Registration addMenuOnClickListener(ComponentEventListener<MenuComponentClickedEvent> menuButtonClickedListener)
+	{
+		return addListener(MenuComponentClickedEvent.class, menuButtonClickedListener);
+	}
 
 	private Div createMenuComponent()
 	{

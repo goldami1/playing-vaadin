@@ -3,7 +3,6 @@ package com.packagename.myapp.spring.menu;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.packagename.myapp.spring.MenuLayout;
 import com.packagename.myapp.spring.menu.Section.SectionType;
 
 public class Menu extends MenuLayout

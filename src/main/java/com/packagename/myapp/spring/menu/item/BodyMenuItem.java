@@ -19,7 +19,7 @@ public class BodyMenuItem extends MenuItem implements ClickNotifier<BodyMenuItem
 	private boolean submenu;
 	private int menuHierarchyLevel;
 	private static final int COLOR_MULTIPLICATION_CONST = 25;
-	private static final String defaultBackgroundColor = COLOR.LIGHTGRAY.toString();
+	private static final String defaultBackgroundColor = COLOR.WHITESMOKE.toString();
 	private IronCollapseLayout submenuLayout;
 	private List<BodyMenuItem> submenuItems;
 	
@@ -62,10 +62,7 @@ public class BodyMenuItem extends MenuItem implements ClickNotifier<BodyMenuItem
 		submenuLayout = new IronCollapseLayout();
 		contentWrapper.add(submenuLayout);
 		menuEntry.addSubmenuToggleIcon();
-		menuEntry.addMenuItemClickListener(e ->
-		{
-			submenuLayout.toggle();
-		});
+		menuEntry.addMenuItemClickListener(e -> submenuLayout.toggle());
 	}
 	
 	private RGBColorModel evaluateBackgroundColor()

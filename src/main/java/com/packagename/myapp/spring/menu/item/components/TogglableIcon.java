@@ -14,6 +14,7 @@ public class TogglableIcon extends TogglableComponent<Icon>
 						Icon component)
 	{
 		super(component);
+		Optional.ofNullable(component).get().addClickListener(e -> toggle());
 		this.toggleEnableClassName = Optional.ofNullable(toggleEnableClassName).get();
 		this.toggleDisableClassName = Optional.ofNullable(toggleDisableClassName).get();
 	}

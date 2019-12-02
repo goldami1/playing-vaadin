@@ -7,7 +7,7 @@
 	overflow-x: hidden;
 	overflow-y: auto;
 	white-space: nowrap;
-	background-color: #d3d9e1;
+	background-color: #f5f5f5;
 	padding-left: 4px;
 	padding-right: 4px;
 	flex-direction: column;
@@ -21,17 +21,94 @@
 	transition: width 0.5s ease;
 }
 
-.menu-layout-dynamic:hover{
-	width: 400px;
-}
-
 .menu-layout-collapsed{
 	width: 38px;
 }
 
+.menu-layout-dynamic:hover{
+	width: 14%;
+}
+
 .menu-layout-extended{
-	width: 400px;
+	width: 16%;
 	position: static;
+}
+
+@media screen and (max-width: 1680px) {
+	.menu-layout-dynamic:hover{
+	width: 16%;
+	}
+	
+	.menu-layout-extended{
+	width: 19%;
+	position: static;
+	}
+}
+
+@media screen and (max-width: 1440px) {
+	.menu-layout-dynamic:hover{
+	width: 18%;
+	}
+	
+	.menu-layout-extended{
+	width: 22%;
+	position: static;
+	}
+}
+
+@media screen and (max-width: 1366px) {
+	.menu-layout-dynamic:hover{
+	width: 20%;
+	}
+	
+	.menu-layout-extended{
+	width: 25%;
+	position: static;
+	}
+}
+
+@media screen and (max-width: 1280px) {
+	.menu-layout-dynamic:hover{
+	width: 22%;
+	}
+	
+	.menu-layout-extended{
+	width: 28%;
+	position: static;
+	}
+}
+
+@media screen and (max-width: 1152px) {
+	.menu-layout-dynamic:hover{
+	width: 24%;
+	}
+	
+	.menu-layout-extended{
+	width: 32%;
+	position: static;
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	.menu-layout-dynamic:hover{
+	width: 26%;
+	}
+	
+	.menu-layout-extended{
+	width: 35%;
+	position: static;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.menu-layout-dynamic:hover{
+	width: 32%;
+	}
+	
+	.menu-layout-extended{
+	width: 46%;
+	position: static;
+	}
 }
 
 [class*="main-app-layout-"]

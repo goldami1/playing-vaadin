@@ -1,5 +1,6 @@
 package com.packagename.myapp.spring.app;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,25 +27,51 @@ import com.vaadin.flow.router.Route;
 public class AppLayout extends CompositeWrapperHorizontalLayout
 {
 	private static final long serialVersionUID = 1366743745420863584L;
+	private enum AppLayoutDisplayType {
+		EXTENDED("menu-layout-extended", "main-app-layout-content"),
+		COLLAPSED("menu-layout-collapsed", "main-app-layout-content-with-menu"),
+		DYNAMIC("menu-layout-dynamic", "main-app-layout-content-with-menu");
+		
+		String menubarCssConfig, contentCssConfig;
+		
+		public String getContentCssConfig()
+		{
+			return contentCssConfig;
+		}
+		
+		public String getMenubarCssConfig()
+		{
+			return menubarCssConfig;
+		}
+		
+		private AppLayoutDisplayType(String menubarCssConfig, String contentCssConfig)
+		{
+			this.menubarCssConfig = menubarCssConfig;
+			this.contentCssConfig = contentCssConfig;
+		}
+		
+	};
+	private AppLayoutDisplayType menuDisplayType = AppLayoutDisplayType.DYNAMIC;
+	private Menu menuBar;
+	private Div content;
 	
 	public AppLayout()
 	{
-		Div content = new Div();
+		contentWrapper.addClassName("main-app-layout-base");
+		content = new Div();
 		Section headerSection = createHeaderSection();
 		Section bodySection = createBodySection();
 		
-		Menu menuBar = Menu.create(List.of(headerSection, bodySection));
+		menuBar = Menu.create(List.of(headerSection, bodySection));
 		
-		content.setClassName("main-app-layout-content-with-menu");
-		menuBar.setClassName("menu-layout-dynamic");
+		setAppLayoutClassNames(menuDisplayType);
 		
 		contentWrapper.add(menuBar, content);
 		contentWrapper.setFlexGrow(1, content);
 		
-		
 		//------------------------------------------------------------
 		
-BackEnd backEnd = new BackEnd();
+		BackEnd backEnd = new BackEnd();
 		
 		Grid<Tester> grid = new Grid<>(Tester.class);
         grid.setSizeFull();
@@ -199,9 +226,7 @@ BackEnd backEnd = new BackEnd();
 	private Section createHeaderSection()
 	{
 		Section headerSection = new HeaderSection();
-		
-		headerSection.addItem(
-				new HeaderHamburgerMenuItem()
+		HeaderHamburgerMenuItem hamburgerMenuItem = new HeaderHamburgerMenuItem()
 		{
 			private static final long serialVersionUID = 1L;
 
@@ -222,8 +247,40 @@ BackEnd backEnd = new BackEnd();
 				
 				return logoWrapper;
 			}
-		});
+		};
+		
+		hamburgerMenuItem.addMenuOnClickListener(e -> toggleMenuState());
+		headerSection.addItem(hamburgerMenuItem);
 		
 		return headerSection;
+	}
+	
+	private void toggleMenuState()
+	{
+		switch(menuDisplayType)
+		{
+		case DYNAMIC:
+			menuDisplayType = AppLayoutDisplayType.EXTENDED;
+			break;
+		case EXTENDED:
+			menuDisplayType = AppLayoutDisplayType.COLLAPSED;
+			break;
+		case COLLAPSED:
+			menuDisplayType = AppLayoutDisplayType.DYNAMIC;
+			break;
+		}
+		
+		setAppLayoutClassNames(menuDisplayType);
+	}
+	
+	private void setAppLayoutClassNames(AppLayoutDisplayType appLayoutDisplayType)
+	{
+		content.setClassName(appLayoutDisplayType.getContentCssConfig());
+		Arrays.asList(AppLayoutDisplayType.values())
+				.stream()
+				.map(t -> t.getMenubarCssConfig())
+				.filter(t -> !t.contentEquals(appLayoutDisplayType.getMenubarCssConfig()))
+				.forEach(t -> menuBar.removeClassName(t));
+		menuBar.addClassName(appLayoutDisplayType.getMenubarCssConfig());
 	}
 }

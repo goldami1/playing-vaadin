@@ -1,4 +1,4 @@
-package com.packagename.myapp.spring;
+package com.packagename.myapp.spring.menu;
 
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.StyleSheet;
