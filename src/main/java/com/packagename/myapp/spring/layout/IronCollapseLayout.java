@@ -1,4 +1,4 @@
-package com.packagename.myapp.spring.menu;
+package com.packagename.myapp.spring.layout;
 
 import com.github.appreciated.IronCollapse;
 import com.vaadin.flow.component.Component;

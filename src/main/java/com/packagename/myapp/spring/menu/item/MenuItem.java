@@ -1,6 +1,6 @@
 package com.packagename.myapp.spring.menu.item;
 
-import com.packagename.myapp.spring.menu.CompositeWrapperVerticalLayout;
+import com.packagename.myapp.spring.layout.CompositeWrapperVerticalLayout;
 
 public abstract class MenuItem extends CompositeWrapperVerticalLayout implements IMenuItem, HasInlineStyle
 {

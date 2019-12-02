@@ -3,6 +3,7 @@ package com.packagename.myapp.spring.menu;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.packagename.myapp.spring.layout.CompositeWrapperVerticalLayout;
 import com.packagename.myapp.spring.menu.item.MenuItem;
 
 public abstract class Section extends CompositeWrapperVerticalLayout

@@ -1,6 +1,6 @@
 package com.packagename.myapp.spring.menu.item;
 
-import com.packagename.myapp.spring.menu.item.components.SeparatorElement;
+import com.packagename.myapp.spring.menu.item.component.SeparatorElement;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;

@@ -1,6 +1,6 @@
 package com.packagename.myapp.spring.menu.item;
 
-import com.packagename.myapp.spring.utils.ColorUtils.COLOR;
+import com.packagename.myapp.spring.util.ColorUtils.COLOR;
 import com.vaadin.flow.component.HasStyle;
 
 public interface HasInlineStyle extends HasStyle

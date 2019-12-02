@@ -1,4 +1,4 @@
-package com.packagename.myapp.spring.app;
+package com.packagename.myapp.spring.layout;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -6,14 +6,13 @@ import java.util.List;
 
 import com.packagename.myapp.spring.Grid;
 import com.packagename.myapp.spring.menu.BodySection;
-import com.packagename.myapp.spring.menu.CompositeWrapperHorizontalLayout;
 import com.packagename.myapp.spring.menu.HeaderSection;
 import com.packagename.myapp.spring.menu.Menu;
 import com.packagename.myapp.spring.menu.Section;
 import com.packagename.myapp.spring.menu.item.BodyMenuItem;
 import com.packagename.myapp.spring.menu.item.HeaderHamburgerMenuItem;
-import com.packagename.myapp.spring.menu.item.components.CustomTitleLabel;
-import com.packagename.myapp.spring.menu.item.components.CustomTitleLabel.TitleType;
+import com.packagename.myapp.spring.menu.item.component.CustomTitleLabel;
+import com.packagename.myapp.spring.menu.item.component.CustomTitleLabel.TitleType;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.VaadinIcon;

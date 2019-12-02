@@ -1,6 +1,6 @@
-package com.packagename.myapp.spring.menu.item.components;
+package com.packagename.myapp.spring.menu.item.component;
 
-import com.packagename.myapp.spring.menu.CompositeWrapperLayout;
+import com.packagename.myapp.spring.layout.CompositeWrapperLayout;
 import com.vaadin.flow.component.html.Label;
 
 public class CustomTitleLabel extends CompositeWrapperLayout<Label>

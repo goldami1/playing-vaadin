@@ -1,6 +1,6 @@
-package com.packagename.myapp.spring.menu.item.components;
+package com.packagename.myapp.spring.menu.item.component;
 
-import com.packagename.myapp.spring.menu.CompositeWrapperLayout;
+import com.packagename.myapp.spring.layout.CompositeWrapperLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.dependency.CssImport;
 

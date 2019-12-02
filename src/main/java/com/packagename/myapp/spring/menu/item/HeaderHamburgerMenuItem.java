@@ -1,6 +1,6 @@
 package com.packagename.myapp.spring.menu.item;
 
-import com.packagename.myapp.spring.menu.item.components.TogglableActionIcon;
+import com.packagename.myapp.spring.menu.item.component.TogglableActionIcon;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.html.Div;

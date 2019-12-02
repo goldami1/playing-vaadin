@@ -1,4 +1,4 @@
-package com.packagename.myapp.spring.menu.item.components;
+package com.packagename.myapp.spring.menu.item.component;
 
 import java.util.Optional;
 

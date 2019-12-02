@@ -3,10 +3,10 @@ package com.packagename.myapp.spring.menu.item;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.packagename.myapp.spring.menu.IronCollapseLayout;
-import com.packagename.myapp.spring.utils.ColorUtils;
-import com.packagename.myapp.spring.utils.ColorUtils.COLOR;
-import com.packagename.myapp.spring.utils.ColorUtils.RGBColorModel;
+import com.packagename.myapp.spring.layout.IronCollapseLayout;
+import com.packagename.myapp.spring.util.ColorUtils;
+import com.packagename.myapp.spring.util.ColorUtils.COLOR;
+import com.packagename.myapp.spring.util.ColorUtils.RGBColorModel;
 import com.vaadin.flow.component.ClickNotifier;
 import com.vaadin.flow.component.icon.Icon;
 

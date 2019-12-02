@@ -3,14 +3,13 @@ package com.packagename.myapp.spring.menu;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.packagename.myapp.spring.layout.MenuLayout;
 import com.packagename.myapp.spring.menu.Section.SectionType;
 
 public class Menu extends MenuLayout
 {
 	private static final long serialVersionUID = -4214876491992354733L;
 	private List<Section> sections;
-	private enum MenuDisplayType {EXTENDED,COLLAPSED,DYNAMIC};
-	private MenuDisplayType menuDisplayMode = MenuDisplayType.DYNAMIC;
 	
 	private Menu()
 	{

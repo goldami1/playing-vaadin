@@ -4,8 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.github.appreciated.IronCollapse;
-import com.packagename.myapp.spring.menu.CompositeWrapperLayout;
-import com.vaadin.flow.component.charts.model.style.Color;
+import com.packagename.myapp.spring.layout.CompositeWrapperLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 public class SubmenuLayout extends CompositeWrapperLayout<IronCollapse>
@@ -13,7 +12,6 @@ public class SubmenuLayout extends CompositeWrapperLayout<IronCollapse>
 	private static final long serialVersionUID = -1314770404079599694L;
 	private VerticalLayout submenuLayout;
 	private List<IMenuItem> submenuItems;
-	private Color submenuLayoutBackgroundColor;
 	
 	public SubmenuLayout()
 	{
@@ -28,11 +26,6 @@ public class SubmenuLayout extends CompositeWrapperLayout<IronCollapse>
 	public void toggle()
 	{
 		contentWrapper.toggle();
-	}
-	
-	public void darkenColor()
-	{
-		//TODO
 	}
 	
 	public void addMenuEntry(BodyMenuItem menuEntry)

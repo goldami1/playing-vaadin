@@ -1,4 +1,4 @@
-package com.packagename.myapp.spring.utils;
+package com.packagename.myapp.spring.util;
 
 import java.util.Optional;
 import java.util.function.Supplier;
