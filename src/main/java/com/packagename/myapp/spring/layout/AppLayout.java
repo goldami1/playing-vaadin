@@ -57,18 +57,18 @@ public class AppLayout extends CompositeWrapperHorizontalLayout
 		SUPPORT("Support", VaadinIcon.SPECIALIST);
     	
     	private String name;
-    	private Icon menuItemIcon;
+    	private VaadinIcon menuItemIcon;
     	
     	private MENU_DESCRIPTOR(String name, VaadinIcon menuItemIcon)
     	{
     		this.name = name;
-    		this.menuItemIcon = menuItemIcon.create();
+    		this.menuItemIcon = menuItemIcon;
     	}
     	
 		@SuppressWarnings("unused")
 		public Icon getIcon()
     	{
-    		return menuItemIcon;
+    		return menuItemIcon.create();
     	}
     	
     	@Override
