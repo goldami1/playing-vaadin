@@ -26,12 +26,13 @@ public class BodyMenuItem extends MenuItem implements ClickNotifier<BodyMenuItem
 	
 	public BodyMenuItem(Icon menuEntryIcon, String menuEntryTitle)
 	{
-		contentWrapper.setWidthFull();
 		setBackgroundColor(RGBColorModel.create(defaultBackgroundColor).setOpacity(0.5f).toString());
+		contentWrapper.setWidthFull();
 		submenu = false;
 		menuHierarchyLevel = 0;
+		menuEntry = new MenuEntry(menuEntryIcon, menuEntryTitle);
 		
-		contentWrapper.add(menuEntry = new MenuEntry(menuEntryIcon, menuEntryTitle));
+		contentWrapper.add(menuEntry);
 	};
 	
 	public BodyMenuItem setHierarchyLevel(int menuHierarchyLevel)

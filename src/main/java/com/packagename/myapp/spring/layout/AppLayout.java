@@ -15,6 +15,7 @@ import com.packagename.myapp.spring.menu.item.component.CustomTitleLabel;
 import com.packagename.myapp.spring.menu.item.component.CustomTitleLabel.TitleType;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
@@ -26,6 +27,54 @@ import com.vaadin.flow.router.Route;
 public class AppLayout extends CompositeWrapperHorizontalLayout
 {
 	private static final long serialVersionUID = 1366743745420863584L;
+	private enum MENU_DESCRIPTOR{
+    	HOME("Home", VaadinIcon.HOME),
+    	TOPOLOGY("Topology", VaadinIcon.SITEMAP),
+    	REMOTES("Remotes", VaadinIcon.CLOUD),
+    	STORAGES("Storages", VaadinIcon.STORAGE),
+		XTENDERS("xTenders", VaadinIcon.CLUSTER),
+		XRWRRECORDERS("xRWRRecorders", VaadinIcon.COMPILE),
+		PLUGINS("Plugins", VaadinIcon.PLUG),
+		LIBRARIES("Libraries", VaadinIcon.FOLDER),
+		COLLECTORS("Collectors", VaadinIcon.INBOX),
+		TRANSFORMERS("Transformers", VaadinIcon.FLIP_V),
+		ANALYSERS("Analysers", VaadinIcon.EYEDROPPER),
+		NOTIFIERS("Notifiers", VaadinIcon.BELL_O),
+		CONFIGURATION("Configuration", VaadinIcon.COGS),
+		COLLECTOR_CONFIGURATIONS("Collector Configurations", VaadinIcon.INBOX),
+		TRANSFORMER_CONFIGURATIONS("Transformer Configurations", VaadinIcon.FLIP_V),
+		ANALYSER_CONFIGURATIONS("Analyser Configurations", VaadinIcon.EYEDROPPER),
+		FILTER_CONFIGURATIONS("Filter Configurations", VaadinIcon.FILTER),
+		VIEW_CONFIGURATIONS("View Configurations", VaadinIcon.VIEWPORT),
+		NOTIFIER_CONFIGURATIONS("Notifier Configurations", VaadinIcon.BELL_O),
+		SESSIONS("Sessions", VaadinIcon.CHART_GRID),
+		SESSION_RECORD("SessionRecord", VaadinIcon.RECORDS),
+		GRID("Grid", VaadinIcon.GRID_SMALL_O),
+		NODES("Nodes", VaadinIcon.CONNECT_O),
+		EXECUTE_RESULTS("Execute Results", VaadinIcon.CLIPBOARD_CHECK),
+		SUPPORT("Support", VaadinIcon.SPECIALIST);
+    	
+    	private String name;
+    	private Icon menuItemIcon;
+    	
+    	private MENU_DESCRIPTOR(String name, VaadinIcon menuItemIcon)
+    	{
+    		this.name = name;
+    		this.menuItemIcon = menuItemIcon.create();
+    	}
+    	
+		@SuppressWarnings("unused")
+		public Icon getIcon()
+    	{
+    		return menuItemIcon;
+    	}
+    	
+    	@Override
+    	public String toString()
+    	{
+    		return name;
+    	}
+	};
 	private enum AppLayoutDisplayType {
 		EXTENDED("menu-layout-extended", "main-app-layout-content"),
 		COLLAPSED("menu-layout-collapsed", "main-app-layout-content-with-menu"),
@@ -175,41 +224,83 @@ public class AppLayout extends CompositeWrapperHorizontalLayout
 		}
     }
 	//-------------------------------------------------------
-
+	
+    private BodyMenuItem createBodyMenuItem(MENU_DESCRIPTOR menuDesc)
+    {
+    	return new BodyMenuItem(menuDesc.getIcon(), menuDesc.toString());
+    }
+    
+    private List<BodyMenuItem> createPluginsSubItems()
+    {
+    	List<BodyMenuItem> res = new LinkedList<>();
+    	
+    	res.add(createBodyMenuItem(MENU_DESCRIPTOR.LIBRARIES));
+    	res.add(createBodyMenuItem(MENU_DESCRIPTOR.COLLECTORS));
+    	res.add(createBodyMenuItem(MENU_DESCRIPTOR.TRANSFORMERS));
+    	res.add(createBodyMenuItem(MENU_DESCRIPTOR.ANALYSERS));
+    	res.add(createBodyMenuItem(MENU_DESCRIPTOR.NOTIFIERS));
+    	
+    	return res;
+    }
+    
+    private List<BodyMenuItem> createTopologySubItems()
+    {
+    	List<BodyMenuItem> res = new LinkedList<>();
+    	
+    	BodyMenuItem remotes = createBodyMenuItem(MENU_DESCRIPTOR.REMOTES);
+		remotes.addSubItem(new BodyMenuItem(VaadinIcon.BULLSEYE.create(), "Bullet1"));
+		remotes.addSubItem(new BodyMenuItem(VaadinIcon.BULLSEYE.create(), "Bullet2"));
+		remotes.addSubItem(new BodyMenuItem(VaadinIcon.BULLSEYE.create(), "Bullet3"));
+		
+		res.add(remotes);
+		res.add(createBodyMenuItem(MENU_DESCRIPTOR.STORAGES));
+		res.add(createBodyMenuItem(MENU_DESCRIPTOR.XTENDERS));
+		res.add(createBodyMenuItem(MENU_DESCRIPTOR.XRWRRECORDERS));
+		
+		return res;
+    }
+    
+    private List<BodyMenuItem> createConfigurationSubItems()
+    {
+    	List<BodyMenuItem> res = new LinkedList<>();
+    	
+    	res.add(createBodyMenuItem(MENU_DESCRIPTOR.COLLECTOR_CONFIGURATIONS));
+    	res.add(createBodyMenuItem(MENU_DESCRIPTOR.TRANSFORMER_CONFIGURATIONS));
+    	res.add(createBodyMenuItem(MENU_DESCRIPTOR.ANALYSER_CONFIGURATIONS));
+    	res.add(createBodyMenuItem(MENU_DESCRIPTOR.FILTER_CONFIGURATIONS));
+    	res.add(createBodyMenuItem(MENU_DESCRIPTOR.VIEW_CONFIGURATIONS));
+    	res.add(createBodyMenuItem(MENU_DESCRIPTOR.NOTIFIER_CONFIGURATIONS));
+    	
+    	return res;
+    }
+    
+    private List<BodyMenuItem> createGridSubItems()
+    {
+    	List<BodyMenuItem> res = new LinkedList<>();
+    	
+    	res.add(createBodyMenuItem(MENU_DESCRIPTOR.NODES));
+		res.add(createBodyMenuItem(MENU_DESCRIPTOR.EXECUTE_RESULTS));
+		
+		return res;
+    }
+    
 	private Section createBodySection()
 	{
 		Section bodySection = new BodySection();
 		
-		BodyMenuItem homeMenuItem = new BodyMenuItem(VaadinIcon.HOME.create(), "Home");
-		BodyMenuItem topologyMenuItem = new BodyMenuItem(VaadinIcon.SITEMAP.create(), "Topology");
-		BodyMenuItem remotes = new BodyMenuItem(VaadinIcon.CLOUD.create(), "Remotes");
-		remotes.addSubItem(new BodyMenuItem(VaadinIcon.BULLSEYE.create(), "Bullet1"));
-		remotes.addSubItem(new BodyMenuItem(VaadinIcon.BULLSEYE.create(), "Bullet2"));
-		remotes.addSubItem(new BodyMenuItem(VaadinIcon.BULLSEYE.create(), "Bullet3"));
-		topologyMenuItem.addSubItem(remotes);
-		topologyMenuItem.addSubItem(new BodyMenuItem(VaadinIcon.STORAGE.create(), "Storages"));
-		topologyMenuItem.addSubItem(new BodyMenuItem(VaadinIcon.CLUSTER.create(), "xTenders"));
-		topologyMenuItem.addSubItem(new BodyMenuItem(VaadinIcon.COMPILE.create(), "xRWRRecorders"));
-		BodyMenuItem pluginsMenuItem = new BodyMenuItem(VaadinIcon.PLUG.create(), "Plugins");
-		pluginsMenuItem.addSubItem(new BodyMenuItem(VaadinIcon.FOLDER.create(), "Libraries"));
-		pluginsMenuItem.addSubItem(new BodyMenuItem(VaadinIcon.INBOX.create(), "Collectors"));
-		pluginsMenuItem.addSubItem(new BodyMenuItem(VaadinIcon.FLIP_V.create(), "Transformers"));
-		pluginsMenuItem.addSubItem(new BodyMenuItem(VaadinIcon.EYEDROPPER.create(), "Analysers"));
-		pluginsMenuItem.addSubItem(new BodyMenuItem(VaadinIcon.BELL_O.create(), "Notifiers"));
-		BodyMenuItem configurationMenuItem = new BodyMenuItem(VaadinIcon.COGS.create(), "Configuration");
-		configurationMenuItem.addSubItem(new BodyMenuItem(VaadinIcon.INBOX.create(), "Collector Configurations"));
-		configurationMenuItem.addSubItem(new BodyMenuItem(VaadinIcon.FLIP_V.create(), "Transformer Configurations"));
-		configurationMenuItem.addSubItem(new BodyMenuItem(VaadinIcon.EYEDROPPER.create(), "Analyser Configurations"));
-		configurationMenuItem.addSubItem(new BodyMenuItem(VaadinIcon.FILTER.create(), "Filter Configurations"));
-		configurationMenuItem.addSubItem(new BodyMenuItem(VaadinIcon.VIEWPORT.create(), "View Configurations"));
-		configurationMenuItem.addSubItem(new BodyMenuItem(VaadinIcon.BELL_O.create(), "Notifier Configurations"));
-		BodyMenuItem sessionsMenuItem = new BodyMenuItem(VaadinIcon.CHART_GRID.create(), "Sessions");
-		sessionsMenuItem.addSubItem(new BodyMenuItem(VaadinIcon.RECORDS.create(), "5d7f6bae1e4d990c68223918"));
-		sessionsMenuItem.addSubItem(new BodyMenuItem(VaadinIcon.RECORDS.create(), "5d7f6b1f1e4d990c68223902"));
-		BodyMenuItem gridMenuItem = new BodyMenuItem(VaadinIcon.GRID_SMALL_O.create(), "Grid");
-		gridMenuItem.addSubItem(new BodyMenuItem(VaadinIcon.CONNECT_O.create(), "Nodes"));
-		gridMenuItem.addSubItem(new BodyMenuItem(VaadinIcon.CLIPBOARD_CHECK.create(), "Execute Results"));
-		BodyMenuItem supportMenuItem = new BodyMenuItem(VaadinIcon.SPECIALIST.create(), "Support");
+		BodyMenuItem homeMenuItem = createBodyMenuItem(MENU_DESCRIPTOR.HOME);
+		BodyMenuItem topologyMenuItem = createBodyMenuItem(MENU_DESCRIPTOR.TOPOLOGY);
+		createTopologySubItems().forEach(item -> topologyMenuItem.addSubItem(item));
+		BodyMenuItem pluginsMenuItem = createBodyMenuItem(MENU_DESCRIPTOR.PLUGINS);
+		createPluginsSubItems().forEach(item -> pluginsMenuItem.addSubItem(item));
+		BodyMenuItem configurationMenuItem = createBodyMenuItem(MENU_DESCRIPTOR.CONFIGURATION);
+		createConfigurationSubItems().forEach(item -> configurationMenuItem.addSubItem(item));
+		BodyMenuItem sessionsMenuItem = createBodyMenuItem(MENU_DESCRIPTOR.SESSIONS);
+		sessionsMenuItem.addSubItem(new BodyMenuItem(MENU_DESCRIPTOR.SESSION_RECORD.getIcon(), "5d7f6bae1e4d990c68223918"));
+		sessionsMenuItem.addSubItem(new BodyMenuItem(MENU_DESCRIPTOR.SESSION_RECORD.getIcon(), "5d7f6b1f1e4d990c68223902"));
+		BodyMenuItem gridMenuItem = createBodyMenuItem(MENU_DESCRIPTOR.GRID);
+		createGridSubItems().forEach(item -> gridMenuItem.addSubItem(item));
+		BodyMenuItem supportMenuItem = createBodyMenuItem(MENU_DESCRIPTOR.SUPPORT);
 		
 		bodySection.addItem(homeMenuItem);
 		bodySection.addItem(topologyMenuItem);
