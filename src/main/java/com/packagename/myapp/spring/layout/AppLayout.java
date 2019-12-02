@@ -1,8 +1,10 @@
 package com.packagename.myapp.spring.layout;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import com.packagename.myapp.spring.Grid;
 import com.packagename.myapp.spring.menu.BodySection;
@@ -100,11 +102,14 @@ public class AppLayout extends CompositeWrapperHorizontalLayout
 		
 	};
 	private AppLayoutDisplayType menuDisplayType = AppLayoutDisplayType.DYNAMIC;
+	private Map<MENU_DESCRIPTOR, BodyMenuItem> menuItemsMap;
 	private Menu menuBar;
 	private Div content;
 	
 	public AppLayout()
 	{
+		menuItemsMap = new HashMap<>();
+		
 		contentWrapper.addClassName("main-app-layout-base");
 		content = new Div();
 		Section headerSection = createHeaderSection();
@@ -227,7 +232,10 @@ public class AppLayout extends CompositeWrapperHorizontalLayout
 	
     private BodyMenuItem createBodyMenuItem(MENU_DESCRIPTOR menuDesc)
     {
-    	return new BodyMenuItem(menuDesc.getIcon(), menuDesc.toString());
+    	BodyMenuItem res = new BodyMenuItem(menuDesc.getIcon(), menuDesc.toString());
+    	menuItemsMap.put(menuDesc, res);
+    	
+    	return res;
     }
     
     private List<BodyMenuItem> createPluginsSubItems()
