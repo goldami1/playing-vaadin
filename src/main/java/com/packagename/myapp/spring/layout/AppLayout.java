@@ -12,7 +12,7 @@ import com.packagename.myapp.spring.menu.HeaderSection;
 import com.packagename.myapp.spring.menu.Menu;
 import com.packagename.myapp.spring.menu.Section;
 import com.packagename.myapp.spring.menu.item.BodyMenuItem;
-import com.packagename.myapp.spring.menu.item.HeaderHamburgerMenuItem;
+import com.packagename.myapp.spring.menu.item.PinnableHeaderMenuItem;
 import com.packagename.myapp.spring.menu.item.component.CustomTitleLabel;
 import com.packagename.myapp.spring.menu.item.component.CustomTitleLabel.TitleType;
 import com.packagename.myapp.spring.view.GenericView;
@@ -31,6 +31,8 @@ import com.vaadin.flow.router.Route;
 public class AppLayout extends CompositeWrapperHorizontalLayout
 {
 	private static final long serialVersionUID = 1366743745420863584L;
+	private static final String mainAppLayoutBaseStyleClassName = "main-app-layout-base";
+	
 	private enum MENU_DESCRIPTOR{
 		HOME("Home", VaadinIcon.HOME),
 		TOPOLOGY("Topology", VaadinIcon.SITEMAP),
@@ -102,7 +104,7 @@ public class AppLayout extends CompositeWrapperHorizontalLayout
 		}
 
 	};
-	private AppLayoutDisplayType menuDisplayType = AppLayoutDisplayType.DYNAMIC;
+	private AppLayoutDisplayType menuDisplayType = AppLayoutDisplayType.COLLAPSED;
 	private Map<MENU_DESCRIPTOR, BodyMenuItem> menuItemsMap;
 	private Menu menuBar;
 	private Div content;
@@ -111,7 +113,7 @@ public class AppLayout extends CompositeWrapperHorizontalLayout
 	{
 		menuItemsMap = new HashMap<>();
 
-		contentWrapper.addClassName("main-app-layout-base");
+		contentWrapper.addClassName(mainAppLayoutBaseStyleClassName);
 		content = new Div();
 		Section headerSection = createHeaderSection();
 		Section bodySection = createBodySection();
@@ -206,8 +208,6 @@ public class AppLayout extends CompositeWrapperHorizontalLayout
 		BodyMenuItem configurationMenuItem = createBodyMenuItem(MENU_DESCRIPTOR.CONFIGURATION, () -> {});
 		createConfigurationSubItems().forEach(item -> configurationMenuItem.addSubItem(item));
 		BodyMenuItem sessionsMenuItem = createBodyMenuItem(MENU_DESCRIPTOR.SESSIONS, () -> {});
-		sessionsMenuItem.addSubItem(new BodyMenuItem(MENU_DESCRIPTOR.SESSION_RECORD.getIcon(), "5d7f6bae1e4d990c68223918", () -> System.out.println("session1")));
-		sessionsMenuItem.addSubItem(new BodyMenuItem(MENU_DESCRIPTOR.SESSION_RECORD.getIcon(), "5d7f6b1f1e4d990c68223902", () -> System.out.println("session2")));
 		BodyMenuItem gridMenuItem = createBodyMenuItem(MENU_DESCRIPTOR.GRID, () -> {});
 		createGridSubItems().forEach(item -> gridMenuItem.addSubItem(item));
 		BodyMenuItem supportMenuItem = createBodyMenuItem(MENU_DESCRIPTOR.SUPPORT, () -> {});
@@ -226,7 +226,7 @@ public class AppLayout extends CompositeWrapperHorizontalLayout
 	private Section createHeaderSection()
 	{
 		Section headerSection = new HeaderSection();
-		HeaderHamburgerMenuItem hamburgerMenuItem = new HeaderHamburgerMenuItem()
+		PinnableHeaderMenuItem hamburgerMenuItem = new PinnableHeaderMenuItem()
 		{
 			private static final long serialVersionUID = 1L;
 

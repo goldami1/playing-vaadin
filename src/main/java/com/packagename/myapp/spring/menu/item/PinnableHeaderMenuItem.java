@@ -10,11 +10,14 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.shared.Registration;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode;
 
-public abstract class HeaderHamburgerMenuItem extends HeaderMenuItem<HorizontalLayout>
+public abstract class PinnableHeaderMenuItem extends HeaderMenuItem<HorizontalLayout>
 {
 	private static final long serialVersionUID = -1208289264314494270L;
+	private static final String menuIconEffectToggleStyleClassName = "menu-item-icon-rotation";
+	private static final String menuIconEffectRetoggleStyleClassName = "menu-item-icon-rotation-toggled";
 	
-	public HeaderHamburgerMenuItem()
+	
+	public PinnableHeaderMenuItem()
 	{
 		HorizontalLayout rowLayout = createRowLayout();
 		
@@ -40,8 +43,9 @@ public abstract class HeaderHamburgerMenuItem extends HeaderMenuItem<HorizontalL
 
 	private Div createMenuComponent()
 	{
-		return new Div(new TogglableActionIcon("menu-item-icon-rotation",
-				"menu-item-icon-rotation-toggled", VaadinIcon.MENU.create(), () -> toggleMenuState()));
+		return new Div(new TogglableActionIcon(menuIconEffectToggleStyleClassName,
+												menuIconEffectRetoggleStyleClassName,
+												VaadinIcon.PIN.create(), () -> toggleMenuState()));
 	}
 	
 	private void toggleMenuState()
@@ -49,11 +53,11 @@ public abstract class HeaderHamburgerMenuItem extends HeaderMenuItem<HorizontalL
 		fireEvent(new MenuComponentClickedEvent(this, false));
 	}
 
-	public class MenuComponentClickedEvent extends ComponentEvent<HeaderHamburgerMenuItem>
+	public class MenuComponentClickedEvent extends ComponentEvent<PinnableHeaderMenuItem>
 	{
 		private static final long serialVersionUID = -2880318393040733464L;
 
-		public MenuComponentClickedEvent(HeaderHamburgerMenuItem source, boolean fromClient)
+		public MenuComponentClickedEvent(PinnableHeaderMenuItem source, boolean fromClient)
 		{
 			super(source, fromClient);
 		}

@@ -16,6 +16,13 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 public class MenuEntry extends TogglableActionComponent<Div> implements IMenuItem
 {
 	private static final long serialVersionUID = 6561923337482901458L;
+	private static final String iconEffectEnableStyleClassName = "icon-item-rotation-toggle-enabled";
+	private static final String iconEffectDisableStyleClassName = "icon-item-rotation-toggle-disabled";
+	private static final String menuEntryStyleClassName = "menu-item-style";
+	private static final String menuItemTextStyleClassName = "menu-item-text-style";
+	private static final String actionEffectEnableStyleClassName = "n";
+	private static final String actionEffectDisableStyleClassName = "n";
+	
 	
 	private Label menuEntryTitle;
 	private Icon menuEntryIcon;
@@ -44,7 +51,7 @@ public class MenuEntry extends TogglableActionComponent<Div> implements IMenuIte
 		menuEntryWrapper.setSpacing(false);
 		menuEntryWrapper.addClickListener(e -> fireEvent(new MenuEntryClickedEvent(this, false)));
 		
-		menuEntryWrapper.addClassName("menu-item-style");
+		menuEntryWrapper.addClassName(menuEntryStyleClassName);
 		HorizontalLayout iconAndLabelLayout = createIconTitleLayout(menuEntryIcon, menuEntryTitle);
 		menuEntryWrapper.add(iconAndLabelLayout);
 		addMenuItemClickListener(e -> activateOnToggle());
@@ -54,9 +61,9 @@ public class MenuEntry extends TogglableActionComponent<Div> implements IMenuIte
 
 	public void addSubmenuToggleIcon()
 	{
-		submenuDropdownIcon = new TogglableIcon("icon-item-rotation-toggle-enabled",
-											"icon-item-rotation-toggle-disabled",
-											VaadinIcon.CHEVRON_DOWN_SMALL.create());
+		submenuDropdownIcon = new TogglableIcon(iconEffectEnableStyleClassName,
+												iconEffectDisableStyleClassName,
+												VaadinIcon.CHEVRON_DOWN_SMALL.create());
 		
 		FlexLayout iconWrapper = new FlexLayout(submenuDropdownIcon);
 		
@@ -72,7 +79,7 @@ public class MenuEntry extends TogglableActionComponent<Div> implements IMenuIte
 		HorizontalLayout iconAndLabelLayout = new HorizontalLayout();
 		
 		this.menuEntryTitle = new Label(menuEntryTitle);
-		this.menuEntryTitle.addClassName("menu-item-text-style");
+		this.menuEntryTitle.addClassName(menuItemTextStyleClassName);
 		this.menuEntryIcon = menuEntryIcon;
 		
 		iconAndLabelLayout.add(this.menuEntryIcon, this.menuEntryTitle);
@@ -96,11 +103,11 @@ public class MenuEntry extends TogglableActionComponent<Div> implements IMenuIte
 
 	@Override
 	public String getToggleEnableClassName() {
-		return "n";
+		return actionEffectEnableStyleClassName;
 	}
 
 	@Override
 	public String getToggleDisableClassName() {
-		return "n";
+		return actionEffectDisableStyleClassName;
 	}
 }
