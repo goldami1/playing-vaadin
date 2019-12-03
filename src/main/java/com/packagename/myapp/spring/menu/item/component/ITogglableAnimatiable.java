@@ -7,5 +7,5 @@ public interface ITogglableAnimatiable
 {
 	String getToggleEnableClassName();
 	String getToggleDisableClassName();
-	void toggle();
+	void toggleAnimation();
 }

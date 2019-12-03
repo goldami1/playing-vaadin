@@ -64,7 +64,7 @@ public class MenuEntry extends TogglableActionComponent<Div> implements IMenuIte
 		menuEntryWrapper.expand(iconWrapper);
 		menuEntryWrapper.add(iconWrapper);
 		
-		menuEntryWrapper.addClickListener(e -> submenuDropdownIcon.toggle());
+		menuEntryWrapper.addClickListener(e -> submenuDropdownIcon.toggleAnimation());
 	}
 	
 	private HorizontalLayout createIconTitleLayout(Icon menuEntryIcon, String menuEntryTitle)
@@ -96,13 +96,11 @@ public class MenuEntry extends TogglableActionComponent<Div> implements IMenuIte
 
 	@Override
 	public String getToggleEnableClassName() {
-		//TODO
-		return "nana";
+		return "n";
 	}
 
 	@Override
 	public String getToggleDisableClassName() {
-		//TODO
-		return "nana";
+		return "n";
 	}
 }

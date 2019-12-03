@@ -22,7 +22,7 @@ public abstract class TogglableActionComponent<T extends Component & HasStyle & 
 	public void activateOnToggle()
 	{
 		ITogglableActionable.super.activateOnToggle();
-		toggle();
+		toggleAnimation();
 	}
 
 	@Override

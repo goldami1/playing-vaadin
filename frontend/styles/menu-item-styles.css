@@ -2,7 +2,8 @@
 	font-weight: 400;
 }
 
-.menu-item-style{
+
+[class*="menu-item-style"]{
 	align-content: flex-start;
 	border-radius: 3px;
 	user-select: none;
@@ -13,5 +14,12 @@
 }
 
 .menu-item-style:hover{
+	background-color: #E7F1FE;
+}
+
+.menu-item-style-basic{
+}
+
+.menu-item-style-highlighted{
 	background-color: #E7F1FE;
 }

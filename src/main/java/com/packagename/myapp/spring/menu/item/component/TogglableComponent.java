@@ -23,13 +23,13 @@ public abstract class TogglableComponent<T extends Component & HasStyle & ClickN
 	public TogglableComponent(T component)
 	{
 		this();
-		contentWrapper.addClickListener(e -> toggle());
+		contentWrapper.addClickListener(e -> toggleAnimation());
 		contentWrapper.add(component);
 		this.component = component;
 	}
 	
 	@Override
-	public void toggle()
+	public void toggleAnimation()
 	{
 		if(toggleStatus)
 		{
