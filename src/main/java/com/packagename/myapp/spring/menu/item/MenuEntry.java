@@ -10,6 +10,10 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode;
 import com.vaadin.flow.shared.Registration;
+
+import dev.mett.vaadin.tooltip.Tooltips;
+import dev.mett.vaadin.tooltip.Tooltips.PLACEMENT;
+
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
@@ -39,6 +43,7 @@ public class MenuEntry extends TogglableActionComponent<Div> implements IMenuIte
 		MenuEntry menuEntry = new MenuEntry(new Div(), toggleAction);
 		menuEntry.init(menuEntryIcon, menuEntryTitle);
 		menuEntry.contentWrapper.setWidthFull();
+		menuEntry.enableToolTip();
 		
 		return menuEntry;
 	}
@@ -57,6 +62,16 @@ public class MenuEntry extends TogglableActionComponent<Div> implements IMenuIte
 		addMenuItemClickListener(e -> activateOnToggle());
 		
 		contentWrapper.add(menuEntryWrapper);
+	}
+	
+	public void enableToolTip()
+	{
+		Tooltips.getCurrent().setTooltip(this.menuEntryIcon, this.menuEntryTitle.getText(), PLACEMENT.RIGHT);
+	}
+	
+	public void disableToolTip()
+	{
+		Tooltips.getCurrent().removeTooltip(this.menuEntryIcon);
 	}
 
 	public void addSubmenuToggleIcon()
