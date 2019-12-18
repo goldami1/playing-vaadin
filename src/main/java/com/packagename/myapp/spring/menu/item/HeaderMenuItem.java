@@ -1,5 +1,9 @@
 package com.packagename.myapp.spring.menu.item;
 
+import java.util.Collection;
+import java.util.Collections;
+
+import com.github.goldami1.vaadin.tooltip.component.TooltipComponent;
 import com.packagename.myapp.spring.menu.item.component.SeparatorElement;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
@@ -38,6 +42,12 @@ public abstract class HeaderMenuItem<T extends Component> extends MenuItem
 	{
 		contentWrapper.setWidthFull();
 		contentWrapper.getStyle().set("margin-bottom", "20px");
+	}
+	
+	@Override
+	public Collection<TooltipComponent> getTooltipElement()
+	{
+		return Collections.emptyList();
 	}
 	
 	protected HorizontalLayout createRowLayout()

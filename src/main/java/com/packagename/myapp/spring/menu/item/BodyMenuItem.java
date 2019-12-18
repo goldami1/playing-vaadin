@@ -1,8 +1,11 @@
 package com.packagename.myapp.spring.menu.item;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
+import com.github.goldami1.vaadin.tooltip.component.TooltipComponent;
 import com.packagename.myapp.spring.layout.IronCollapseLayout;
 import com.packagename.myapp.spring.util.ColorUtils;
 import com.packagename.myapp.spring.util.ColorUtils.COLOR;
@@ -22,6 +25,7 @@ public class BodyMenuItem extends MenuItem implements ClickNotifier<BodyMenuItem
 	private static final String defaultBackgroundColor = COLOR.WHITESMOKE.toString();
 	private IronCollapseLayout submenuLayout;
 	private List<BodyMenuItem> submenuItems;
+	private TooltipComponent tooltipWrappedMenuEntry;
 	
 	
 	public BodyMenuItem(Icon menuEntryIcon, String menuEntryTitle, Runnable toggleAction)
@@ -31,8 +35,9 @@ public class BodyMenuItem extends MenuItem implements ClickNotifier<BodyMenuItem
 		
 		submenu = false;
 		menuHierarchyLevel = 0;
+		menuEntry = MenuEntry.create(menuEntryIcon, menuEntryTitle, toggleAction);
 		
-		contentWrapper.add(menuEntry = MenuEntry.create(menuEntryIcon, menuEntryTitle, toggleAction));
+		contentWrapper.add(tooltipWrappedMenuEntry = menuEntry.getTooltipWrapped());
 	};
 	
 	public BodyMenuItem setHierarchyLevel(int menuHierarchyLevel)
@@ -69,5 +74,18 @@ public class BodyMenuItem extends MenuItem implements ClickNotifier<BodyMenuItem
 	private RGBColorModel evaluateBackgroundColor()
 	{
 		return ColorUtils.darkenColor(RGBColorModel.create(contentWrapper.getStyle().get(getBackgroundPropertyName())).setOpacity(0.5f), 100-menuHierarchyLevel*COLOR_MULTIPLICATION_CONST);
+	}
+
+	@Override
+	public Collection<TooltipComponent> getTooltipElement()
+	{
+		Collection<TooltipComponent> res = new LinkedList<>();
+		
+		res.add(tooltipWrappedMenuEntry);
+		if(submenu)
+			submenuItems.forEach(e -> Optional.ofNullable(e.getTooltipElement()).ifPresent(c -> res.addAll(c)));
+			
+		
+		return res;
 	}
 }

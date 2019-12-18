@@ -1,18 +1,25 @@
 package com.packagename.myapp.spring.menu;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
 import com.packagename.myapp.spring.layout.CompositeWrapperVerticalLayout;
 import com.packagename.myapp.spring.menu.item.MenuItem;
 
-public abstract class Section extends CompositeWrapperVerticalLayout
+public abstract class Section extends CompositeWrapperVerticalLayout implements HasItems<MenuItem>
 {
 	private static final long serialVersionUID = 7267063486595409899L;
 
 	public enum SectionType{HEADER,BODY};
 	private SectionType sectionType;
 	private List<MenuItem> menuItems;
+	
+	@Override
+	public Collection<MenuItem> getItems()
+	{
+		return menuItems;
+	}
 	
 	protected Section(SectionType sectionType)
 	{

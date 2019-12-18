@@ -16,13 +16,15 @@ import com.packagename.myapp.spring.menu.item.PinnableHeaderMenuItem;
 import com.packagename.myapp.spring.menu.item.component.CustomTitleLabel;
 import com.packagename.myapp.spring.menu.item.component.CustomTitleLabel.TitleType;
 import com.packagename.myapp.spring.view.GenericView;
+import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.router.Route;
 
@@ -124,7 +126,7 @@ public class AppLayout extends CompositeWrapperHorizontalLayout
 
 		contentWrapper.add(menuBar, content);
 		contentWrapper.setFlexGrow(1, content);
-
+		
 		content.add(setDefaultView());
 	}
 
@@ -261,12 +263,15 @@ public class AppLayout extends CompositeWrapperHorizontalLayout
 		{
 		case DYNAMIC:
 			menuDisplayType = AppLayoutDisplayType.EXTENDED;
+			menuBar.removeTooltips();
 			break;
 		case EXTENDED:
 			menuDisplayType = AppLayoutDisplayType.COLLAPSED;
+			menuBar.enableTooltips();;
 			break;
 		case COLLAPSED:
 			menuDisplayType = AppLayoutDisplayType.DYNAMIC;
+			menuBar.removeTooltips();
 			break;
 		}
 

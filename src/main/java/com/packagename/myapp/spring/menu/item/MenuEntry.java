@@ -1,5 +1,6 @@
 package com.packagename.myapp.spring.menu.item;
 
+import com.packagename.myapp.spring.menu.item.component.HasTooltip;
 import com.packagename.myapp.spring.menu.item.component.TogglableActionComponent;
 import com.packagename.myapp.spring.menu.item.component.TogglableIcon;
 import com.vaadin.flow.component.ComponentEvent;
@@ -11,13 +12,10 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode;
 import com.vaadin.flow.shared.Registration;
 
-import dev.mett.vaadin.tooltip.Tooltips;
-import dev.mett.vaadin.tooltip.Tooltips.PLACEMENT;
-
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
-public class MenuEntry extends TogglableActionComponent<Div> implements IMenuItem
+public class MenuEntry extends TogglableActionComponent<Div> implements IMenuItem, HasTooltip
 {
 	private static final long serialVersionUID = 6561923337482901458L;
 	private static final String iconEffectEnableStyleClassName = "icon-item-rotation-toggle-enabled";
@@ -43,7 +41,6 @@ public class MenuEntry extends TogglableActionComponent<Div> implements IMenuIte
 		MenuEntry menuEntry = new MenuEntry(new Div(), toggleAction);
 		menuEntry.init(menuEntryIcon, menuEntryTitle);
 		menuEntry.contentWrapper.setWidthFull();
-		menuEntry.enableToolTip();
 		
 		return menuEntry;
 	}
@@ -64,16 +61,6 @@ public class MenuEntry extends TogglableActionComponent<Div> implements IMenuIte
 		contentWrapper.add(menuEntryWrapper);
 	}
 	
-	public void enableToolTip()
-	{
-		Tooltips.getCurrent().setTooltip(this.menuEntryIcon, this.menuEntryTitle.getText(), PLACEMENT.RIGHT);
-	}
-	
-	public void disableToolTip()
-	{
-		Tooltips.getCurrent().removeTooltip(this.menuEntryIcon);
-	}
-
 	public void addSubmenuToggleIcon()
 	{
 		submenuDropdownIcon = new TogglableIcon(iconEffectEnableStyleClassName,
@@ -124,5 +111,17 @@ public class MenuEntry extends TogglableActionComponent<Div> implements IMenuIte
 	@Override
 	public String getToggleDisableClassName() {
 		return actionEffectDisableStyleClassName;
+	}
+
+	@Override
+	public MenuEntry getTooltipElement()
+	{
+		return this;
+	}
+	
+	@Override
+	public String getTooltipText()
+	{
+		return menuEntryTitle.getText();
 	}
 }
